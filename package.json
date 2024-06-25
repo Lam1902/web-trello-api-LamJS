@@ -1,0 +1,12 @@
+{
+  "name": "Web-api",
+  "version": "1.0.0",
+  "description": "lamjs mern stack",
+  "main": "src/server.js",
+  "author": "LamJS",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
