@@ -22,13 +22,23 @@ const START_SERVER = () => {
   //middleware xử lí lỗi tập trung
   app.use(errorHandlingMiddleware);
 
-  // xử lí việc app sẽ chạy trên cổng nào và domain nào
-  app.listen(env.APP_PORT, env.APP_HOST, () => {
+  if(env.BUILD_MODE === 'production') {
+    app.listen(process.env.PORT, () => {
+      // eslint-disable-next-line no-console
+      console.log(
+        `Production Hello ${env.AUTHOR}, I am running at ${process.env.PORT}`
+      );
+    });
+  } else {
+     // xử lí việc app sẽ chạy trên cổng nào và domain nào
+  app.listen(env.LOCAL_DEV_APP_PORT, env.LOCAL_DEV_APP_HOST, () => {
     // eslint-disable-next-line no-console
     console.log(
-      `Hello ${env.AUTHOR}, I am running at ${env.APP_HOST}:${env.APP_PORT}/`
+      `Dev Hello ${env.AUTHOR}, I am running at ${env.LOCAL_DEV_APP_HOST}:${env.LOCAL_DEV_APP_PORT}`
     );
   });
+  }
+ 
 
   //Thực hiện các tác vụ cleanup đóng mongodb
   exitHook(() => {
